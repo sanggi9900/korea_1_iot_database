@@ -1,7 +1,7 @@
 # -- datatype --
 
 ### SQL의 데이터 형식 ###
-# 정수형, 문자형, 논리형, 날짜형
+# 정수형, 문자형, 실수형, 논리형, 날짜형
 
 /*
 	1. 정수형
@@ -66,7 +66,7 @@ values (130, 250);
     a) char(개수): 1 ~ 255바이트
     : 고정 길이 문자형
     EX) char(10)의 10자리 중 3자리만 사용하는 경우, 7자리가 비워진 상태로 메모리 낭비
-    >> 길이가 항상  일정하지 않기 때문에 검색 속도가 빠름
+    >> 길이가 항상  일정하기 때문에 검색 속도가 빠름
     >> 짧은 문자열 저장에 사용
     EX) 성별, 국가코드(KOR, CHI, JPA)
     
@@ -80,11 +80,11 @@ values (130, 250);
 	cf) 문자 수와 바이트 수의 차이
     # 영어: 1byte에 1개의 알파벳
     # 한글: utf-8기준 한 글자 당 약 3바이트를 사용
-    >> varchar(255): 255 / 3 = 약 85글자alter
+    >> varchar(255): 255 / 3 = 약 85글자
     
     cf) 다량의 텍스트 데이터 형식
     a) text 형식: 1 ~ 약 65000 바이트
-		longtext 형식 : 1 ~ 42억 바이트
+	   longtext 형식 : 1 ~ 42억 바이트
     
     b) blob (binary long object) : 이미지, 동영상 등의 데이터
 		blob 형식: 1 ~ 약 65000 바이트
@@ -100,3 +100,55 @@ create table `character` (
 
 insert into `character`
 values ('Laptop', 'Electric' , '삼성 갤럭시 북4 노트북 프로', 'example.com');
+
+/*
+	3. 실수형
+    : 소수점이 있는 숫자를 저장할 때 사용
+    > float, double, decimal
+    > float과 double은 부도소수점 방식
+    > decimal은 고정 소수점 방식
+    
+    a) float
+    : 소수점 아래 7자리까지 표현
+    >> 시력, 가격 등
+    
+    b) double
+    : 소수점 아래 15자리까지 표현
+    >> 구체적인 값을 표현할 수 있음
+    
+    c) decimal | numeric
+    : 고정 소수점 데이터 타입, 정밀한 소수점 계산에 필요
+*/
+create database if not exists `example`;  -- 존재하면 노란색 경고창이 이뜬다alter
+
+create table products (
+	price float(7, 2),
+    price2 double(10, 4),
+    price3 decimal(15, 2)
+    
+    # 실수형 데이터 타입은 함수의 형태로 사용
+    # 데이터타입(전체 자리수, 소수점 이하 자리수)
+    
+);
+
+/*
+	4. 논리형
+    : Boolean 값을 저장하기 위한 데이터 타입
+    : 논리적으로 참(True)와 거짓(False)값을 나타냄
+    cf) 비워 둘 경우 null(알 수 없음, 부재한 값)으로 인식
+    
+    cf) MySQL에서는 Boolean 타입이 존재하지만, 실제로는 tinyint(1)로 처리
+		>> TRUE는 1로 FALSE는 0으로 저장
+	
+    cf) Boolean 값에 대소문자 구분 X
+*/
+use example;
+create table employees (
+	is_active Boolean
+);
+
+insert into employees
+values (true);
+
+select * from employees;
+# true의 값이 1로 변환되어 저장됨
