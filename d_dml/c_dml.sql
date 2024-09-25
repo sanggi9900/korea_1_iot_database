@@ -5,7 +5,7 @@
 ### DML (data manipulation language)
 # : 데이터 관리 언어
 # >> 데이터를 삽입, 조회, 수정, 삭제 기능 (CRUD)
-drop database `company`;
+-- drop database `company`;
 create database `company`;
 use `company`;
 
@@ -138,6 +138,6 @@ delete from example02
 where name='선하영';
 
 
-drop table `example02`;
-drop table `example03`;
+-- drop table `example02`;
+-- drop table `example03`;
 
